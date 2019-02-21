@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xpu.dao.EmployeeDao">
+    <resultMap id="employeeResult" type="com.xpu.model.Employee">
+        <result property="realName" column="real_name"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="mobile" column="mobile"/>
+        <result property="email" column="email"/>
+        <result property="position" column="position"/>
+        <result property="note" column="note"/>
+    </resultMap>
+    <sql id="employeeCols">
+        id,real_name,sex,birthday,mobile,email,position,note
+    </sql>
+    <select id="getEmployees" resultMap="employeeResult">
+        SELECT <include refid="employeeCols"/> FROM t_employee
+    </select>
+    <insert id="addEmployee" parameterType="employee">
+        INSERT INTO t_employee(id,real_name,sex,birthday,mobile,email,position,note) values(
+          #{id},#{realName},#{sex},#{birthday},#{mobile},#{email},#{position},#{note}
+        );
+    </insert>
+</mapper>
